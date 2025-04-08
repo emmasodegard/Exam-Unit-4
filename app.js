@@ -28,9 +28,29 @@ function importGames(json) {
   });
 }
 
+function renderGames() {
+  const gameList = document.getElementById('game-list');
+  gameList.innerHTML = '';
+
+  games.forEach((game, index) => {
+    const gameCard = document.createElement('div');
+    gameCard.className = 'game-card';
+
+    gameCard.innerHTML = `
+      <h2>${game.title}</h2>
+      <p>Play Count: <input type="number" value="${game.playCount}" data-index="${index}" class="play-count"></p>
+      <p>Rating: <input type="range" min="0" max="10" value="${game.personalRating}" data-index="${index}" class="rating-slider"></p>
+      <button data-index="${index}" class="action-button">Action</button>
+    `;
+
+    gameList.appendChild(gameCard);
+  });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   const savedGames = getAllGames();
   savedGames.forEach(game => games.push(game));
+  renderGames();
 });
 
 const importInput = document.getElementById('importSource');
@@ -46,6 +66,7 @@ importInput.addEventListener('change', function(event) {
     importGames(content);
     const importedGames = JSON.parse(content);
     importedGames.forEach(game => games.push(game));
+    renderGames();
   };
 
   reader.onerror = function() {
