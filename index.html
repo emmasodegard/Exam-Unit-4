@@ -24,7 +24,7 @@
     <input type="number" id="new-year" placeholder="Year">
     <input type="text" id="new-players" placeholder="Players (e.g. 2–5)">
     <input type="text" id="new-time" placeholder="Play Time (e.g. 60 mins)">
-    <input type="text" id="new-difficulty" placeholder="Difficulty (e.g. Medium)">
+    <input type="text" id="new-difficulty" placeholder="Difficulty (Easy, Medium, Hard)">
     <input type="url" id="new-url" placeholder="BoardGameGeek URL">
     <button id="add-game-button">Add Game</button>
   </div>
@@ -32,11 +32,11 @@
   <h2>Sort Games</h2>
   <select id="sort-options">
     <option value="">-- Select --</option>
-    <option value="players">Player Count</option>
-    <option value="rating">Rating</option>
-    <option value="difficulty">Difficulty</option>
-    <option value="playCount">Play Count</option>
-  </select>
+    <option value="players">Player Count (Low → High)</option>
+    <option value="rating">Rating (High → Low)</option>
+    <option value="difficulty">Difficulty (Easy → Hard)</option>
+    <option value="playCount">Play Count (High → Low)</option>
+  </select>  
 
   <div id="game-list"></div>
 

@@ -193,17 +193,21 @@ sortOptions.addEventListener('change', function() {
 
   if (selected === 'players') {
     games.sort((a, b) => {
-      const aPlayers = parseInt(a.players);
-      const bPlayers = parseInt(b.players);
-      return aPlayers - bPlayers;
+      const aFirstPlayer = parseInt(a.players.split('–')[0]);
+      const bFirstPlayer = parseInt(b.players.split('–')[0]);
+      return aFirstPlayer - bFirstPlayer;
     });
   } else if (selected === 'rating') {
     games.sort((a, b) => b.personalRating - a.personalRating);
   } else if (selected === 'difficulty') {
-    games.sort((a, b) => a.difficulty.localeCompare(b.difficulty));
+    const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
+    games.sort((a, b) => {
+      return (difficultyOrder[a.difficulty] || 99) - (difficultyOrder[b.difficulty] || 99);
+    });
   } else if (selected === 'playCount') {
     games.sort((a, b) => b.playCount - a.playCount);
-  }
-
+  }  
+  
   renderGames();
-});
+  });
+  
