@@ -1,14 +1,14 @@
 body {
-  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans';
   background: #d2eaf3;
   margin: 0;
-  padding: 2rem;
+  padding: 1.5rem;
   color: #000000;
 }
 
 h1, h2 {
   text-align: center;
-  color: #062544;
+  color: #042833;
 }
 
 #add-game-form, #game-list, #sort-options {
