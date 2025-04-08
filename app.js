@@ -40,10 +40,21 @@ function renderGames() {
       <h2>${game.title}</h2>
       <p>Play Count: <input type="number" value="${game.playCount}" data-index="${index}" class="play-count"></p>
       <p>Rating: <input type="range" min="0" max="10" value="${game.personalRating}" data-index="${index}" class="rating-slider"></p>
-      <button data-index="${index}" class="action-button">Action</button>
+      <button data-index="${index}" class="delete-button">Delete</button>
     `;
 
     gameList.appendChild(gameCard);
+  });
+
+  const deleteButtons = document.querySelectorAll('.delete-button');
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      const index = event.target.dataset.index;
+      const gameToDelete = games[index];
+      localStorage.removeItem(gameToDelete.title);
+      games.splice(index, 1);
+      renderGames();
+    });
   });
 }
 
