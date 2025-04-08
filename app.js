@@ -1,4 +1,4 @@
-import Game from './models/Game.mjs';
+import Game from './models/Game.js';
 
 const games = [];
 
@@ -51,68 +51,74 @@ window.addEventListener('DOMContentLoaded', () => {
   const savedGames = getAllGames();
   savedGames.forEach(game => games.push(game));
   renderGames();
-});
 
-const importInput = document.getElementById('importSource');
+  const importInput = document.getElementById('importSource');
+  importInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
 
-importInput.addEventListener('change', function(event) {
-  const file = event.target.files[0];
-  if (!file) return;
+    const reader = new FileReader();
 
-  const reader = new FileReader();
+    reader.onload = function(e) {
+      const content = e.target.result;
+      importGames(content);
+      const importedGames = JSON.parse(content);
+      importedGames.forEach(game => games.push(game));
+      renderGames();
+    };
 
-  reader.onload = function(e) {
-    const content = e.target.result;
-    importGames(content);
-    const importedGames = JSON.parse(content);
-    importedGames.forEach(game => games.push(game));
-    renderGames();
-  };
+    reader.onerror = function() {
+      console.error('Error reading file');
+    };
 
-  reader.onerror = function() {
-    console.error('Error reading file');
-  };
-
-  reader.readAsText(file);
-});
-
-document.addEventListener('input', function(event) {
-    if (event.target.classList.contains('play-count')) {
-      const index = event.target.dataset.index;
-      games[index].playCount = parseInt(event.target.value);
-      saveGame(games[index]);
-    }
-  
-    if (event.target.classList.contains('rating-slider')) {
-      const index = event.target.dataset.index;
-      games[index].personalRating = parseInt(event.target.value);
-      saveGame(games[index]);
-    }
+    reader.readAsText(file);
   });
 
   const addGameButton = document.getElementById('add-game-button');
+  addGameButton.addEventListener('click', function() {
+    const title = document.getElementById('new-title').value.trim();
+    const designer = document.getElementById('new-designer').value.trim();
+    const artist = document.getElementById('new-artist').value.trim();
+    const publisher = document.getElementById('new-publisher').value.trim();
+    const year = parseInt(document.getElementById('new-year').value);
+    const players = document.getElementById('new-players').value.trim();
+    const time = document.getElementById('new-time').value.trim();
+    const difficulty = document.getElementById('new-difficulty').value.trim();
+    const url = document.getElementById('new-url').value.trim();
 
-addGameButton.addEventListener('click', function() {
-  const title = document.getElementById('new-title').value.trim();
-  const designer = document.getElementById('new-designer').value.trim();
-  const artist = document.getElementById('new-artist').value.trim();
-  const publisher = document.getElementById('new-publisher').value.trim();
-  const year = parseInt(document.getElementById('new-year').value);
-  const players = document.getElementById('new-players').value.trim();
-  const time = document.getElementById('new-time').value.trim();
-  const difficulty = document.getElementById('new-difficulty').value.trim();
-  const url = document.getElementById('new-url').value.trim();
+    if (!title) {
+      alert('Please enter a title!');
+      return;
+    }
 
-  if (!title) {
-    alert('Please enter a title!');
-    return;
+    const newGame = new Game(title, designer, artist, publisher, year, players, time, difficulty, url);
+
+    games.push(newGame);
+    saveGame(newGame);
+    renderGames();
+
+    document.getElementById('new-title').value = '';
+    document.getElementById('new-designer').value = '';
+    document.getElementById('new-artist').value = '';
+    document.getElementById('new-publisher').value = '';
+    document.getElementById('new-year').value = '';
+    document.getElementById('new-players').value = '';
+    document.getElementById('new-time').value = '';
+    document.getElementById('new-difficulty').value = '';
+    document.getElementById('new-url').value = '';
+  });
+});
+
+document.addEventListener('input', function(event) {
+  if (event.target.classList.contains('play-count')) {
+    const index = event.target.dataset.index;
+    games[index].playCount = parseInt(event.target.value);
+    saveGame(games[index]);
   }
 
-  const newGame = new Game(title, designer, artist, publisher, year, players, time, difficulty, url);
-
-  games.push(newGame);
-  saveGame(newGame);
-  renderGames();
-
-  document.getElementById('add-game-form').reset();
+  if (event.target.classList.contains('rating-slider')) {
+    const index = event.target.dataset.index;
+    games[index].personalRating = parseInt(event.target.value);
+    saveGame(games[index]);
+  }
 });
