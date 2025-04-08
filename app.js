@@ -187,27 +187,45 @@ document.addEventListener('input', function(event) {
 });
 
 const sortOptions = document.getElementById('sort-options');
-
-sortOptions.addEventListener('change', function() {
-  const selected = sortOptions.value;
-
-  if (selected === 'players') {
-    games.sort((a, b) => {
-      const aFirstPlayer = parseInt(a.players.split('–')[0]);
-      const bFirstPlayer = parseInt(b.players.split('–')[0]);
-      return aFirstPlayer - bFirstPlayer;
-    });
-  } else if (selected === 'rating') {
-    games.sort((a, b) => b.personalRating - a.personalRating);
-  } else if (selected === 'difficulty') {
-    const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
-    games.sort((a, b) => {
-      return (difficultyOrder[a.difficulty] || 99) - (difficultyOrder[b.difficulty] || 99);
-    });
-  } else if (selected === 'playCount') {
-    games.sort((a, b) => b.playCount - a.playCount);
-  }  
   
-  renderGames();
+  let ascendingOrder = true;
+
+  sortOptions.addEventListener('change', function() {
+    sortGames();
   });
   
+  const swapOrderButton = document.getElementById('swap-order-button');
+  swapOrderButton.addEventListener('click', function() {
+    ascendingOrder = !ascendingOrder; // Flip order
+    sortGames();
+  });
+  
+  function sortGames() {
+    const selected = sortOptions.value;
+  
+    if (selected === 'players') {
+      games.sort((a, b) => {
+        const aFirstPlayer = parseInt(a.players.split('–')[0]);
+        const bFirstPlayer = parseInt(b.players.split('–')[0]);
+        return ascendingOrder ? aFirstPlayer - bFirstPlayer : bFirstPlayer - aFirstPlayer;
+      });
+    } else if (selected === 'rating') {
+      games.sort((a, b) => ascendingOrder ? a.personalRating - b.personalRating : b.personalRating - a.personalRating);
+    } else if (selected === 'difficulty') {
+      const difficultyOrder = { 
+        'Light': 1, 
+        'Medium': 2, 
+        'Medium-Heavy': 3, 
+        'Hard': 4 
+      };
+      games.sort((a, b) => {
+        return ascendingOrder 
+          ? (difficultyOrder[a.difficulty] || 99) - (difficultyOrder[b.difficulty] || 99)
+          : (difficultyOrder[b.difficulty] || 99) - (difficultyOrder[a.difficulty] || 99);
+      });
+    } else if (selected === 'playCount') {
+      games.sort((a, b) => ascendingOrder ? a.playCount - b.playCount : b.playCount - a.playCount);
+    }
+  
+    renderGames(); 
+  }

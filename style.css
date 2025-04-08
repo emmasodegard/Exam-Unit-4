@@ -156,3 +156,20 @@ input[type="range"]::-moz-range-thumb {
 .import-button:hover {
   background-color: #45a049;
 }
+
+#swap-order-button {
+  background-color: #7285c7;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  margin: 1rem auto;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#swap-order-button:hover {
+  background-color: #304f79;
+}
