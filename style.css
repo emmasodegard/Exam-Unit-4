@@ -134,3 +134,25 @@ input[type="range"]::-moz-range-thumb {
 .rating-slider {
   background: linear-gradient(to right, #4CAF50 0%, #4CAF50 0%, #ccc 0%, #ccc 100%);
 }
+
+#import-section {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.import-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius:10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.import-button:hover {
+  background-color: #45a049;
+}

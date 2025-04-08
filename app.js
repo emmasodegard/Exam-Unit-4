@@ -56,12 +56,22 @@ function renderGames() {
     gameList.appendChild(gameCard);
   });
 
+  const deleteButtons = document.querySelectorAll('.delete-button');
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      const index = event.target.dataset.index;
+      const gameToDelete = games[index];
+      localStorage.removeItem(gameToDelete.title);
+      games.splice(index, 1);
+      renderGames();
+    });
+  });
+  
   const editButtons = document.querySelectorAll('.edit-button');
   editButtons.forEach(button => {
     button.addEventListener('click', function(event) {
       const index = event.target.dataset.index;
       const game = games[index];
-  
       document.getElementById('new-title').value = game.title;
       document.getElementById('new-designer').value = game.designer;
       document.getElementById('new-artist').value = game.artist;
