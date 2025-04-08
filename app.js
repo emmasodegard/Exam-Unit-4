@@ -75,3 +75,17 @@ importInput.addEventListener('change', function(event) {
 
   reader.readAsText(file);
 });
+
+document.addEventListener('input', function(event) {
+    if (event.target.classList.contains('play-count')) {
+      const index = event.target.dataset.index;
+      games[index].playCount = parseInt(event.target.value);
+      saveGame(games[index]);
+    }
+  
+    if (event.target.classList.contains('rating-slider')) {
+      const index = event.target.dataset.index;
+      games[index].personalRating = parseInt(event.target.value);
+      saveGame(games[index]);
+    }
+  });
