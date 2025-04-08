@@ -33,7 +33,7 @@ h1, h2 {
 }
 
 #add-game-button {
-  background-color: #69af3b; /* Green add button */
+  background-color: #69af3b;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -52,10 +52,29 @@ h1, h2 {
   cursor: pointer;
   transition: background-color 0.2s;
   border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
 }
 
 .delete-button:hover {
-  background-color: #70170d;
+  background-color: #c0392b;
+}
+
+
+.edit-button {
+  background-color: #f1c40f;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+}
+
+.edit-button:hover {
+  background-color: #e67e22;
 }
 
 #sort-options {

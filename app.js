@@ -49,22 +49,36 @@ function renderGames() {
       <input type="range" min="0" max="10" value="${game.personalRating}" data-index="${index}" class="rating-slider">
       <span class="rating-value" id="rating-value-${index}">${game.personalRating}</span>
     </p>
-    <button data-index="${index}" class="delete-button">Delete</button>
+<button data-index="${index}" class="delete-button">Delete</button>
+<button data-index="${index}" class="edit-button">Edit</button>
   `;  
 
     gameList.appendChild(gameCard);
   });
 
-  const deleteButtons = document.querySelectorAll('.delete-button');
-  deleteButtons.forEach(button => {
+  const editButtons = document.querySelectorAll('.edit-button');
+  editButtons.forEach(button => {
     button.addEventListener('click', function(event) {
       const index = event.target.dataset.index;
-      const gameToDelete = games[index];
-      localStorage.removeItem(gameToDelete.title);
+      const game = games[index];
+  
+      document.getElementById('new-title').value = game.title;
+      document.getElementById('new-designer').value = game.designer;
+      document.getElementById('new-artist').value = game.artist;
+      document.getElementById('new-publisher').value = game.publisher;
+      document.getElementById('new-year').value = game.year;
+      document.getElementById('new-players').value = game.players;
+      document.getElementById('new-time').value = game.time;
+      document.getElementById('new-difficulty').value = game.difficulty;
+      document.getElementById('new-url').value = game.url;
+  
       games.splice(index, 1);
+      localStorage.removeItem(game.title);
+  
       renderGames();
     });
   });
+  
 
   const ratingSliders = document.querySelectorAll('.rating-slider');
 
@@ -84,7 +98,7 @@ function renderGames() {
     slider.style.background = `linear-gradient(to right, #4CAF50 0%, #4CAF50 ${val * 10}%, #ccc ${val * 10}%, #ccc 100%)`;
   });
 
-} // <<<<< THIS was missing
+}
 
 window.addEventListener('DOMContentLoaded', () => {
   const savedGames = getAllGames();
