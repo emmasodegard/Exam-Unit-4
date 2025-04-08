@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <h1>Game Record Tracker</h1>
 
   <input type="file" id="importSource">
@@ -18,7 +19,7 @@
     <input type="text" id="new-artist" placeholder="Artist">
     <input type="text" id="new-publisher" placeholder="Publisher">
     <input type="number" id="new-year" placeholder="Year">
-    <input type="text" id="new-players" placeholder="Players (e.g. 2-5)">
+    <input type="text" id="new-players" placeholder="Players (e.g. 2–5)">
     <input type="text" id="new-time" placeholder="Play Time (e.g. 60 mins)">
     <input type="text" id="new-difficulty" placeholder="Difficulty (e.g. Medium)">
     <input type="url" id="new-url" placeholder="BoardGameGeek URL">
@@ -26,13 +27,13 @@
   </div>
 
   <h2>Sort Games</h2>
-<select id="sort-options">
-  <option value="">-- Select --</option>
-  <option value="players">Player Count</option>
-  <option value="rating">Rating</option>
-  <option value="difficulty">Difficulty</option>
-  <option value="playCount">Play Count</option>
-</select>
+  <select id="sort-options">
+    <option value="">-- Select --</option>
+    <option value="players">Player Count</option>
+    <option value="rating">Rating</option>
+    <option value="difficulty">Difficulty</option>
+    <option value="playCount">Play Count</option>
+  </select>
 
   <div id="game-list"></div>
 

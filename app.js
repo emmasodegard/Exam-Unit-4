@@ -37,11 +37,20 @@ function renderGames() {
     gameCard.className = 'game-card';
 
     gameCard.innerHTML = `
-      <h2>${game.title}</h2>
-      <p>Play Count: <input type="number" value="${game.playCount}" data-index="${index}" class="play-count"></p>
-      <p>Rating: <input type="range" min="0" max="10" value="${game.personalRating}" data-index="${index}" class="rating-slider"></p>
-      <button data-index="${index}" class="delete-button">Delete</button>
-    `;
+    <h2>${game.title}</h2>
+    <p><strong>Year:</strong> ${game.year} &nbsp;&nbsp; <strong>Players:</strong> ${game.players} &nbsp;&nbsp; <strong>Time:</strong> ${game.time} &nbsp;&nbsp; <strong>Difficulty:</strong> ${game.difficulty}</p>
+    <p><strong>Designer:</strong> ${game.designer}</p>
+    <p><strong>Artist:</strong> ${game.artist}</p>
+    <p><strong>Publisher:</strong> ${game.publisher}</p>
+    <p><strong>BGG Listing:</strong> <a href="${game.url}" target="_blank">${game.url}</a></p>
+    <p>Play Count: <input type="number" value="${game.playCount}" data-index="${index}" class="play-count"></p>
+    <p>
+      Rating: 
+      <input type="range" min="0" max="10" value="${game.personalRating}" data-index="${index}" class="rating-slider">
+      <span class="rating-value" id="rating-value-${index}">${game.personalRating}</span>
+    </p>
+    <button data-index="${index}" class="delete-button">Delete</button>
+  `;  
 
     gameList.appendChild(gameCard);
   });
@@ -56,7 +65,26 @@ function renderGames() {
       renderGames();
     });
   });
-}
+
+  const ratingSliders = document.querySelectorAll('.rating-slider');
+
+  ratingSliders.forEach(slider => {
+    slider.addEventListener('input', function(event) {
+      const index = event.target.dataset.index;
+      const ratingValue = document.getElementById(`rating-value-${index}`);
+      ratingValue.textContent = event.target.value;
+
+      const max = event.target.max;
+      const val = event.target.value;
+
+      event.target.style.background = `linear-gradient(to right, #4CAF50 0%, #4CAF50 ${val * 10}%, #ccc ${val * 10}%, #ccc 100%)`;
+    });
+
+    const val = slider.value;
+    slider.style.background = `linear-gradient(to right, #4CAF50 0%, #4CAF50 ${val * 10}%, #ccc ${val * 10}%, #ccc 100%)`;
+  });
+
+} // <<<<< THIS was missing
 
 window.addEventListener('DOMContentLoaded', () => {
   const savedGames = getAllGames();

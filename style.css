@@ -1,63 +1,117 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9f9f9;
-    margin: 0;
-    padding: 2rem;
-    color: #333;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  #game-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-  
-  .game-card {
-    background: white;
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-  }
-  
-  .game-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  input[type="range"] {
-    width: 100%;
-  }
-  
-  #add-game-form {
-    display: grid;
-    gap: 10px;
-    margin-bottom: 2rem;
-    background: #fff;
-    padding: 1.5rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  }
-  
-  #add-game-form input, #add-game-form button {
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 1rem;
-  }
-  
-  #add-game-button {
-    background-color: #6c63ff;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  #add-game-button:hover {
-    background-color: #5548c8;
-  }  
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #d2eaf3;
+  margin: 0;
+  padding: 2rem;
+  color: #000000;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #062544;
+}
+
+#add-game-form, #game-list, #sort-options {
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+}
+
+#add-game-form {
+  display: grid;
+  gap: 10px;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+#add-game-form input, #add-game-form button, #sort-options {
+  padding: 0.8rem;
+  border: 1px solid #c4cde9;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+#add-game-button {
+  background-color: #69af3b; /* Green add button */
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: none;
+}
+
+#add-game-button:hover {
+  background-color: #1b4e18;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: none;
+}
+
+.delete-button:hover {
+  background-color: #70170d;
+}
+
+#sort-options {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  background: #ffffff;
+  border: 1px solid #ccc;
+}
+
+.game-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  margin-bottom: 1.5rem;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 8px;
+  appearance: none;
+  background: linear-gradient(to right, #4CAF50 0%, #4CAF50 50%, #ccc 50%, #ccc 100%);
+  border-radius: 5px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #4CAF50;
+  cursor: pointer;
+  margin-top: -6px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #4CAF50;
+  cursor: pointer;
+}
+
+.rating-slider {
+  background: linear-gradient(to right, #4CAF50 0%, #4CAF50 0%, #ccc 0%, #ccc 100%);
+}
