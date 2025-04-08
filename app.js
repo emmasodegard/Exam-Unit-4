@@ -89,3 +89,30 @@ document.addEventListener('input', function(event) {
       saveGame(games[index]);
     }
   });
+
+  const addGameButton = document.getElementById('add-game-button');
+
+addGameButton.addEventListener('click', function() {
+  const title = document.getElementById('new-title').value.trim();
+  const designer = document.getElementById('new-designer').value.trim();
+  const artist = document.getElementById('new-artist').value.trim();
+  const publisher = document.getElementById('new-publisher').value.trim();
+  const year = parseInt(document.getElementById('new-year').value);
+  const players = document.getElementById('new-players').value.trim();
+  const time = document.getElementById('new-time').value.trim();
+  const difficulty = document.getElementById('new-difficulty').value.trim();
+  const url = document.getElementById('new-url').value.trim();
+
+  if (!title) {
+    alert('Please enter a title!');
+    return;
+  }
+
+  const newGame = new Game(title, designer, artist, publisher, year, players, time, difficulty, url);
+
+  games.push(newGame);
+  saveGame(newGame);
+  renderGames();
+
+  document.getElementById('add-game-form').reset();
+});
