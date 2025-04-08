@@ -133,3 +133,25 @@ document.addEventListener('input', function(event) {
     saveGame(games[index]);
   }
 });
+
+const sortOptions = document.getElementById('sort-options');
+
+sortOptions.addEventListener('change', function() {
+  const selected = sortOptions.value;
+
+  if (selected === 'players') {
+    games.sort((a, b) => {
+      const aPlayers = parseInt(a.players);
+      const bPlayers = parseInt(b.players);
+      return aPlayers - bPlayers;
+    });
+  } else if (selected === 'rating') {
+    games.sort((a, b) => b.personalRating - a.personalRating);
+  } else if (selected === 'difficulty') {
+    games.sort((a, b) => a.difficulty.localeCompare(b.difficulty));
+  } else if (selected === 'playCount') {
+    games.sort((a, b) => b.playCount - a.playCount);
+  }
+
+  renderGames();
+});
